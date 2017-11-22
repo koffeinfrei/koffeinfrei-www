@@ -1,0 +1,13 @@
+---
+title: Koffeinfrei | Alexis Reigel
+pageable: false
+---
+
+img.round src='https://www.gravatar.com/avatar/8342950f34a66d9ec7cfe10b33d5494c?s=126'
+
+h1 Log
+
+- page_articles.each_with_index do |article, i|
+  h2
+    = link_to article.title, article
+    = article.date.strftime('%b %e')
