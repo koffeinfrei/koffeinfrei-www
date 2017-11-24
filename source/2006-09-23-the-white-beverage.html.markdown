@@ -1,0 +1,16 @@
+---
+title: the white beverage
+date: 2006-09-23 12:00:00 UTC
+---
+
+At my workplace we have a coffee automat which I didn’t consider more
+than just being my coffee supplier. Yesterday I noticed though that it
+has some peculiar beverage on offer. It’s called "Weisses Getränk mit
+Kaffee" (that was German), and for the English speaking folks the
+translation would be like "White beverage with coffee" (that was
+English). That really sounds ominous. Maybe I don’t want to try that
+one…    
+By the way, sorry for the crappy fotograph, the camera of my cellphone
+lacks almost everything that would make it a good camera.
+
+![white beverage](2006-09-23-the-white-beverage/white-beverage.jpg "white beverage")

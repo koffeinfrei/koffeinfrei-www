@@ -1,0 +1,118 @@
+---
+title: ruby blood through your .net veins
+date: 2008-04-07 12:00:00 UTC
+---
+
+No other programming language has been syntactically [as nice as
+ruby](http://www.ruby-lang.org/en/about/). Ruby is fully object oriented, most
+other languages appear to be not so consistent, especially when it comes to
+primitive data types vs classes. In ruby, everything is an object, in many
+other object oriented language this is not the case. Most of them have
+[primitive data types](http://en.wikipedia.org/wiki/Primitive_type) besides
+classes, which means that you cannot necessarily call methods on all types.
+And, ruby’s syntax lets you write much functionality with little code.
+
+But ruby is not alone, .NET is catching up a bit with each release.  Now with
+version 3.5, M\$ has introduced [extension
+methods](http://en.wikipedia.org/wiki/Extension_method). They allow to extend
+classes dynamically, without the need to subclass.
+
+My first thought was, let’s .NET look more like ruby, in respect to its fully
+object oriented data types. In ruby you could write `2.times {...}` to create a
+neat loop. In .[NET]{.caps}, this is now possible too! You just have to write a
+static class with static methods, where its first paramater is prefixed with
+`this`. The first parameter defines the class type the method is added to.
+That’s it. You can even overload methods. And, the newly created methods popup
+in [intellisense](http://en.wikipedia.org/wiki/IntelliSense)!
+
+![Extension methods -
+intellisense](2008-04-07-ruby-blood-through-your-net-veins/extension-methods-screen1.jpg "Extension methods - intellisense")
+
+2.Times? The rubyists among you know where this is going…
+
+#### Example 1: Extend String class
+
+Let’s extend the string class with an overloaded Replace-Method that
+performs a regexp replace.
+
+
+<pre><code class="language-csharp">
+public static class StringExtensions
+{
+    public static string Replace(this string stringRef, string pattern, string replace, RegexOptions options)
+    {
+        return Regex.Replace(stringRef, pattern, replace);
+    }
+}
+</code></pre>
+
+Call it like this:
+
+<pre><code class="language-csharp">
+public class Program
+{
+    private static void Main(string[] args)
+    {
+        string stringOrig = "this is stupid.";
+        string stringReplaced = stringOrig.Replace(@"(this) is ([^\.]+)\.", "$1 is not $2!", RegexOptions.None);
+        Console.WriteLine(string.Format("Orginal string: {0}\nReplaced string: {1}", stringOrig, stringReplaced));
+        Console.ReadLine();
+    }
+}
+</code></pre>
+
+Pretty neat so far huh? But now, let’s face the 2.times code.
+
+#### Example 2: Create a ruby style iterator
+
+<pre><code class="language-csharp">
+public static class IntegerExtensions
+{
+    public delegate void IntegerExtensionsDelegate(int intRef);
+
+    public static bool IsEven(this int intRef)
+    {
+        return intRef % 2 == 0;
+    }
+
+    public static void Times(this int intRef, IntegerExtensionsDelegate invokeMethod)
+    {
+        for (int i = 0; i &lt; intRef; ++i)
+        {
+            invokeMethod(i);
+        }
+    }
+}
+</code></pre>
+
+Let’s call it now:
+
+<pre><code class="language-csharp">
+public class Program
+{
+    private static void Main(string[] args)
+    {
+        /* ruby heart beats faster */
+        if (2.IsEven())
+        {
+            Console.WriteLine("Number 2 is even!");
+        }
+        Console.WriteLine("And now: 2 times loop"); 
+
+        /* ruby heart collapses in bliss */
+        2.Times(delegate(int number) { Console.WriteLine("&gt; " + number); });
+        Console.ReadLine();
+    }
+}
+</code></pre>
+
+The Times method almost looks like a [ruby
+iterator](http://www.rubycentral.com/pickaxe/tut_containers.html#S2) with a
+block assigned. Instead of having a block, we just pass a [anonymous
+method](http://msdn2.microsoft.com/en-us/library/0yw3tz5k(VS.80).aspx) (aka.
+[delegate](http://msdn2.microsoft.com/en-us/library/system.delegate.aspx)) to
+the `Times` method, and we pretty much get what we wanted.
+
+If you’re interested in details on the compiler output, you can read about it
+on [Scott Hanselmann’s Computer
+Zen](http://www.hanselman.com/blog/HowDoExtensionMethodsWorkAndWhyWasANewCLRNotRequired.aspx).

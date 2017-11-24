@@ -14,7 +14,6 @@ page '/*.json', layout: false
 page '/*.txt', layout: false
 
 activate :blog do |blog|
-  # blog.sources = "{year}-{month}-{day}-{title}.html"
   blog.permalink = "{year}/{month}/{day}/{title}.html"
 end
 
