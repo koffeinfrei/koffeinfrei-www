@@ -4,10 +4,28 @@ html
     meta charset="utf-8"
     meta http-equiv="x-ua-compatible" content="ie=edge"
     meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    title= current_page.data.title
+    title= [current_page.data.title, 'Koffeinfrei | Alexis Reigel'].compact.join(' ← ')
+    = stylesheet_link_tag 'normalize'
     = stylesheet_link_tag 'site'
     = stylesheet_link_tag 'prism'
     = javascript_include_tag 'site'
     = javascript_include_tag 'prism'
   body
-    = yield
+    header
+      .content-container
+        img.avatar src='https://www.gravatar.com/avatar/8342950f34a66d9ec7cfe10b33d5494c?s=126'
+        h1= current_page.data.page_title || current_page.data.title
+
+    .content
+      .content-container
+        = yield
+
+    footer
+      .content-container
+        ul.blank.footer-links
+          li.footer-link= link_to 'GitLab', 'https://gitlab.com/koffeinfrei'
+          li.footer-link= link_to 'GitHub', 'https://github.com/koffeinfrei'
+          li.footer-link= link_to 'Twitter', 'https://twitter.com/alexisreigel'
+
+        .copyright
+          | &copy; Copyright by Alexis Reigel #{DateTime.current.year}

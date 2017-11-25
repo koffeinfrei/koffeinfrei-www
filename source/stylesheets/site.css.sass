@@ -1,21 +1,100 @@
+$screen-xs: 480px
+
+$spacing: 40px
+
+$font-size-large: 20px
+$font-size-medium: 16px
+$font-size-small: 14px
+
+$color-text-1: #000
+$color-text-2: rgba($color-text-1, 0.7)
+
 @font-face
-  font-family: 'Bespoke-BNi7wWnSfh'
-  src: font-url('Bespoke-BNi7wWnSfh.eot')
-  src: font-url('Bespoke-BNi7wWnSfh.eot?#iefix') format('embedded-opentype'), font-url('Bespoke-BNi7wWnSfh.woff') format('woff'), font-url('Bespoke-BNi7wWnSfh.ttf') format('truetype'), font-url('Bespoke-BNi7wWnSfh.svg#Bespoke-BNi7wWnSfh') format('svg')
+  font-family: 'Bespoke-c90qhHYNza'
+  src: font-url('Bespoke-c90qhHYNza.eot')
+  src: font-url('Bespoke-c90qhHYNza.eot?#iefix') format('embedded-opentype'), font-url('Bespoke-c90qhHYNza.woff') format('woff'), font-url('Bespoke-c90qhHYNza.ttf') format('truetype'), font-url('Bespoke-c90qhHYNza.svg#Bespoke-c90qhHYNza') format('svg')
 
 body
-  font-family: 'Bespoke-BNi7wWnSfh'
-  background-color: #fff
-  color: #7dc676
-  padding: 1vh 1rem
+  font-family: 'Bespoke-c90qhHYNza'
+  line-height: 1.7
+  padding: $spacing 0 0 0
+
+header
   text-align: center
 
+h1
+  font-size: $font-size-large
+  margin: 0 0 $spacing 0
+
+.content-container
+  max-width: 860px
+  margin: auto
+  color: $color-text-1
+  font-size: $font-size-medium
+
 a
-  color: rgba(#000, 0.7)
+  color: $color-text-2
 
   &:focus,
   &:hover
-    color: rgba(#000, 0.6)
+    color: rgba($color-text-1, 0.5)
 
-.round
+ul
+  &.blank
+    margin: 0
+    padding: 0
+
+  li
+    list-style: none
+
+.content
+  margin: 0 0 $spacing 0
+
+.avatar
   border-radius: 50%
+  margin: 0 0 $spacing / 2 0
+
+ul.log-items
+  line-height: 2.3
+
+li.log-item
+  display: flex
+  justify-content: space-between
+  flex-wrap: wrap
+  @media (min-width: $screen-xs)
+    flex-wrap: nowrap
+
+.log-item-title
+  max-with: 100%
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+  word-wrap: normal
+  @media (min-width: $screen-xs)
+    margin-right: 20px
+
+a.log-item-title-link
+  color: #216f1a
+  text-decoration: none
+
+  &:focus,
+  &:hover
+    text-decoration: underline
+
+.log-item-date
+  white-space: nowrap
+  color: $color-text-2
+
+ul.footer-links
+  display: flex
+  justify-content: center
+  font-size: $font-size-small
+  margin: 0 0 $spacing / 2 0
+
+li.footer-link
+  display: inline
+  margin: 0 $spacing / 2
+
+.copyright
+  font-size: $font-size-small
+  text-align: center
