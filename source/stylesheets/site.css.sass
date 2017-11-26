@@ -19,7 +19,10 @@ $color-text-2: rgba($color-text-1, 0.7)
 body
   font-family: 'Bespoke-c90qhHYNza'
   line-height: 1.7
-  padding: $spacing 0 0 0
+  padding: $spacing $spacing-small
+
+  @media (min-width: $screen-xs)
+    padding: $spacing 0
 
 header
   text-align: center
@@ -51,10 +54,11 @@ ul
 
 .content
   margin: 0 0 $spacing 0
+  text-align: justify
 
 .avatar
   border-radius: 50%
-  margin: 0 0 $spacing / 2 0
+  margin: 0 0 $spacing-medium 0
 
 ul.log-items
   line-height: 2.3
@@ -73,7 +77,7 @@ li.log-item
   white-space: nowrap
   word-wrap: normal
   @media (min-width: $screen-xs)
-    margin-right: 20px
+    margin-right: $spacing-medium
 
 a.log-item-title-link
   color: #216f1a
