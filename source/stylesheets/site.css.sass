@@ -1,6 +1,8 @@
 $screen-xs: 480px
 
 $spacing: 40px
+$spacing-medium: $spacing / 2
+$spacing-small: $spacing / 4
 
 $font-size-large: 20px
 $font-size-medium: 16px
@@ -85,15 +87,29 @@ a.log-item-title-link
   white-space: nowrap
   color: $color-text-2
 
-ul.footer-links
+ul.footer-navigation
   display: flex
   justify-content: center
+  flex-wrap: wrap
   font-size: $font-size-small
-  margin: 0 0 $spacing / 2 0
+  margin: 0 0 $spacing-medium 0
 
-li.footer-link
+li.footer-navigation
   display: inline
-  margin: 0 $spacing / 2
+  margin: 0 $spacing-medium
+
+.footer-navigation-link
+  display: flex
+
+.footer-navigation-link-logo
+  align-self: center
+  margin: 0 $spacing-small 0 0
+
+  svg
+    height: 30px
+
+.footer-navigation-link-text
+  align-self: center
 
 .copyright
   font-size: $font-size-small

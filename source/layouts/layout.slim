@@ -22,10 +22,19 @@ html
 
     footer
       .content-container
-        ul.blank.footer-links
-          li.footer-link= link_to 'GitLab', 'https://gitlab.com/koffeinfrei'
-          li.footer-link= link_to 'GitHub', 'https://github.com/koffeinfrei'
-          li.footer-link= link_to 'Twitter', 'https://twitter.com/alexisreigel'
+        ul.blank.footer-navigation
+          li.footer-navigation
+            = link_to 'https://gitlab.com/koffeinfrei', class: 'footer-navigation-link' do
+              .footer-navigation-link-logo= inline_svg 'gitlab-logo'
+              .footer-navigation-link-text GitLab
+          li.footer-navigation
+            = link_to 'https://github.com/koffeinfrei', class: 'footer-navigation-link' do
+              .footer-navigation-link-logo= inline_svg 'github-logo'
+              .footer-navigation-link-text GitHub
+          li.footer-navigation
+            = link_to 'https://twitter.com/alexisreigel', class: 'footer-navigation-link' do
+              .footer-navigation-link-logo= inline_svg 'twitter-logo'
+              .footer-navigation-link-text Twitter
 
         .copyright
           | &copy; Copyright by Alexis Reigel #{DateTime.current.year}
