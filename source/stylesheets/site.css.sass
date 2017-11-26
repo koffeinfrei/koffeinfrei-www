@@ -60,13 +60,11 @@ ul
   border-radius: 50%
   margin: 0 0 $spacing-medium 0
 
-ul.log-items
-  line-height: 2.3
-
 li.log-item
   display: flex
   justify-content: space-between
   flex-wrap: wrap
+
   @media (min-width: $screen-xs)
     flex-wrap: nowrap
 
@@ -90,6 +88,11 @@ a.log-item-title-link
 .log-item-date
   white-space: nowrap
   color: $color-text-2
+  font-size: $font-size-small
+  margin: 0 0 $spacing-small
+
+  @media (min-width: $screen-xs)
+    font-size: $font-size-medium
 
 ul.footer-navigation
   display: flex
