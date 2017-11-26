@@ -22,19 +22,19 @@ html
 
     footer
       .content-container
-        ul.blank.footer-navigation
-          li.footer-navigation
-            = link_to 'https://gitlab.com/koffeinfrei', class: 'footer-navigation-link' do
-              .footer-navigation-link-logo= inline_svg 'gitlab-logo'
-              .footer-navigation-link-text GitLab
-          li.footer-navigation
-            = link_to 'https://github.com/koffeinfrei', class: 'footer-navigation-link' do
-              .footer-navigation-link-logo= inline_svg 'github-logo'
-              .footer-navigation-link-text GitHub
-          li.footer-navigation
-            = link_to 'https://twitter.com/alexisreigel', class: 'footer-navigation-link' do
-              .footer-navigation-link-logo= inline_svg 'twitter-logo'
-              .footer-navigation-link-text Twitter
+        ul.blank.footer-items
+          li.footer-item
+            = link_to 'https://gitlab.com/koffeinfrei', class: 'footer-item-link' do
+              .footer-item-link-logo= inline_svg 'gitlab-logo'
+              .footer-item-link-text GitLab
+          li.footer-item
+            = link_to 'https://github.com/koffeinfrei', class: 'footer-item-link' do
+              .footer-item-link-logo= inline_svg 'github-logo'
+              .footer-item-link-text GitHub
+          li.footer-item
+            = link_to 'https://twitter.com/alexisreigel', class: 'footer-item-link' do
+              .footer-item-link-logo= inline_svg 'twitter-logo'
+              .footer-item-link-text Twitter
 
         .copyright
           | &copy; Copyright by Alexis Reigel #{DateTime.current.year}
