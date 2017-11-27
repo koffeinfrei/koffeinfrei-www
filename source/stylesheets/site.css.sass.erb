@@ -130,3 +130,28 @@ li.footer-item
 .copyright
   font-size: $font-size-small
   text-align: center
+
+// animations
+
+.animated
+  animation-duration: 0.2s
+  animation-fill-mode: both
+
+  &.sequentially
+    // currently the number of blog posts is the upper limit. this may change
+    // in the future
+    @for $i from 1 through <%= page_articles.count %>
+      &:nth-child(#{$i})
+        animation-delay: .1s + ($i / 30)
+
+@keyframes fadeInUp
+  from
+    opacity: 0
+    transform: translate3d(0, 100%, 0)
+
+  to
+    opacity: 1
+    transform: none
+
+.fade-in-up
+  animation-name: fadeInUp

@@ -5,7 +5,7 @@ pageable: false
 
 ul.blank
   - page_articles.each_with_index do |article, i|
-    li.log-item
+    li.log-item.animated.sequentially.fade-in-up
       .log-item-title
         = link_to article.title, article, class: 'log-item-title-link'
       .log-item-date
