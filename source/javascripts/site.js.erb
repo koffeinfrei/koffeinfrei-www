@@ -6,6 +6,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
     .then(function(quotes) {
       var randomQuote = quotes[Math.floor(Math.random() * quotes.length)]
       var randomQuoteElement = document.querySelector('.js-random-quote');
-      randomQuoteElement.innerHTML = randomQuote.quote;
+      randomQuoteElement.innerHTML = randomQuote.quote + '\n\n' + randomQuote.author;
     });
 });
