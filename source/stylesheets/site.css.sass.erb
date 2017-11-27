@@ -134,7 +134,7 @@ li.footer-item
 // animations
 
 .animated
-  animation-duration: 0.2s
+  animation-duration: 1s
   animation-fill-mode: both
 
   &.sequentially
@@ -155,3 +155,14 @@ li.footer-item
 
 .fade-in-up
   animation-name: fadeInUp
+  animation-duration: 0.2s
+
+@keyframes fadeIn
+  from
+    opacity: 0
+
+  to
+    opacity: 1
+
+.fade-in
+  animation-name: fadeIn
