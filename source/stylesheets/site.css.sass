@@ -10,6 +10,7 @@ $font-size-small: 14px
 
 $color-text-1: #000
 $color-text-2: rgba($color-text-1, 0.7)
+$color-text-3: rgba($color-text-1, 0.5)
 
 @font-face
   font-family: 'Bespoke-c90qhHYNza'
@@ -42,7 +43,7 @@ a
 
   &:focus,
   &:hover
-    color: rgba($color-text-1, 0.5)
+    color: $color-text-3
 
 ul
   &.blank
@@ -51,6 +52,14 @@ ul
 
   li
     list-style: none
+
+blockquote
+  color: $color-text-3
+  margin: 0
+  padding: 0 0 0 $spacing-medium
+  border-left: 2px solid rgba($color-text-1, 0.2)
+  font-style: oblique
+  white-space: pre-wrap
 
 .content
   margin: 0 0 $spacing 0

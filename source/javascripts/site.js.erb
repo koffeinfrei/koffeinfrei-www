@@ -1,0 +1,11 @@
+document.addEventListener('DOMContentLoaded', function(event) {
+  fetch('<%= asset_url('quotes.json') %>')
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(quotes) {
+      var randomQuote = quotes[Math.floor(Math.random() * quotes.length)]
+      var randomQuoteElement = document.querySelector('.js-random-quote');
+      randomQuoteElement.innerHTML = randomQuote.quote;
+    });
+});
