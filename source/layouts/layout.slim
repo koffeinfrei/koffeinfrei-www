@@ -10,13 +10,13 @@ html
     = stylesheet_link_tag 'prism'
     = javascript_include_tag 'site'
     = javascript_include_tag 'prism'
-  body.animated.fade-in
-    header
+  body
+    header.animated.fade-in
       .content-container
         img.avatar src='https://www.gravatar.com/avatar/8342950f34a66d9ec7cfe10b33d5494c?s=100'
         h1= current_page.data.page_title || current_page.data.title
 
-    .content
+    .content.animated.fade-in
       .content-container
         = yield
 
@@ -24,7 +24,7 @@ html
       .content-container
         blockquote.js-random-quote
 
-    footer
+    footer.animated.fade-in
       .content-container
         ul.blank.footer-items
           = partial 'footer-item', locals: { link: 'https://gitlab.com/koffeinfrei', text: 'GitLab', svg: 'gitlab-logo' }

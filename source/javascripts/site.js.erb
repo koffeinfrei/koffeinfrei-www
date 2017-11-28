@@ -7,5 +7,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
       var randomQuote = quotes[Math.floor(Math.random() * quotes.length)]
       var randomQuoteElement = document.querySelector('.js-random-quote');
       randomQuoteElement.innerHTML = randomQuote.quote + '\n\n' + randomQuote.author;
+      randomQuoteElement.classList.add('animated', 'fade-in')
     });
 });
