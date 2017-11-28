@@ -17,6 +17,10 @@ $color-text-3: rgba($color-text-1, 0.5)
   src: font-url('Bespoke-c90qhHYNza.eot')
   src: font-url('Bespoke-c90qhHYNza.eot?#iefix') format('embedded-opentype'), font-url('Bespoke-c90qhHYNza.woff') format('woff'), font-url('Bespoke-c90qhHYNza.ttf') format('truetype'), font-url('Bespoke-c90qhHYNza.svg#Bespoke-c90qhHYNza') format('svg')
 
+//
+// stock elements
+//
+
 body
   font-family: 'Bespoke-c90qhHYNza'
   line-height: 1.7
@@ -31,6 +35,7 @@ header
 h1
   font-size: $font-size-large
   margin: 0 0 $spacing 0
+  position: relative
 
 .content-container
   max-width: 860px
@@ -61,47 +66,40 @@ blockquote
   font-style: oblique
   white-space: pre-wrap
 
+//
+// overall
+//
+
 .content
   margin: 0 0 $spacing 0
   text-align: justify
 
+.h1-back
+  display: block
+  color: $color-text-1
+
+  @media (min-width: $screen-xs)
+    position: absolute
+    left: 0
+
+  svg
+    height: $font-size-large
+    width: $font-size-large
+
+//
+// header
+//
+
 .avatar
   border-radius: 50%
-  margin: 0 0 $spacing-medium 0
 
-li.log-item
-  display: flex
-  justify-content: space-between
-  flex-wrap: wrap
-
-  @media (min-width: $screen-xs)
-    flex-wrap: nowrap
-
-.log-item-title
-  max-with: 100%
-  overflow: hidden
-  text-overflow: ellipsis
-  white-space: nowrap
-  word-wrap: normal
-  @media (min-width: $screen-xs)
-    margin-right: $spacing-medium
-
-a.log-item-title-link
-  color: #216f1a
-  text-decoration: none
-
-  &:focus,
-  &:hover
-    text-decoration: underline
-
-.log-item-date
-  white-space: nowrap
+.headline
   color: $color-text-2
-  font-size: $font-size-small
-  margin: 0 0 $spacing-small
+  margin: 0 0 $spacing 0
 
-  @media (min-width: $screen-xs)
-    font-size: $font-size-medium
+//
+// footer
+//
 
 ul.footer-items
   display: flex
@@ -131,7 +129,9 @@ li.footer-item
   font-size: $font-size-small
   text-align: center
 
+//
 // animations
+//
 
 .animated
   animation-duration: 1s
@@ -166,3 +166,41 @@ li.footer-item
 
 .fade-in
   animation-name: fadeIn
+
+//
+// articles
+//
+
+li.log-item
+  display: flex
+  justify-content: space-between
+  flex-wrap: wrap
+
+  @media (min-width: $screen-xs)
+    flex-wrap: nowrap
+
+.log-item-title
+  max-with: 100%
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+  word-wrap: normal
+  @media (min-width: $screen-xs)
+    margin-right: $spacing-medium
+
+a.log-item-title-link
+  color: #216f1a
+  text-decoration: none
+
+  &:focus,
+  &:hover
+    text-decoration: underline
+
+.log-item-date
+  white-space: nowrap
+  color: $color-text-2
+  font-size: $font-size-small
+  margin: 0 0 $spacing-small
+
+  @media (min-width: $screen-xs)
+    font-size: $font-size-medium

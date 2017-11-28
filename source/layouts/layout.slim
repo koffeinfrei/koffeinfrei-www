@@ -14,7 +14,14 @@ html
     header.animated.fade-in
       .content-container
         img.avatar src='https://www.gravatar.com/avatar/8342950f34a66d9ec7cfe10b33d5494c?s=100'
-        h1= current_page.data.page_title || current_page.data.title
+
+        .headline free software, web technologies and heavy metal coding (and ruby of course)
+
+        h1
+          - if current_page.url != '/'
+            = link_to '/', class: 'h1-back' do
+              = inline_svg 'arrow-left'
+          = current_page.data.page_title || current_page.data.title
 
     .content.animated.fade-in
       .content-container
