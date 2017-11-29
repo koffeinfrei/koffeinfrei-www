@@ -37,6 +37,15 @@ h1
   margin: 0 0 $spacing 0
   position: relative
 
+h2
+  font-size: $font-size-medium
+  // h2 needs top margin since it's used inside running text
+  margin: $spacing-medium 0
+
+pre
+  // overwrite prism styling
+  margin: 0 0 $spacing-small 0 !important
+
 .content-container
   max-width: 860px
   margin: auto
@@ -61,10 +70,18 @@ ul
 blockquote
   color: $color-text-3
   margin: 0
-  padding: 0 0 0 $spacing-medium
+  padding: $spacing-tiny 0 $spacing-tiny $spacing-medium
   border-left: 2px solid rgba($color-text-1, 0.2)
   font-style: oblique
-  white-space: pre-wrap
+
+  &.simple-format
+    white-space: pre-wrap
+
+  p
+    margin: 0
+
+p
+  margin: 0 0 $spacing-small 0
 
 //
 // overall
