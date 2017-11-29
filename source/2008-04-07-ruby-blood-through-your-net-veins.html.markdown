@@ -30,7 +30,7 @@ intellisense](2008-04-07-ruby-blood-through-your-net-veins/extension-methods-scr
 
 2.Times? The rubyists among you know where this is going…
 
-#### Example 1: Extend String class
+## Example 1: Extend String class
 
 Let’s extend the string class with an overloaded Replace-Method that
 performs a regexp replace.
@@ -63,7 +63,7 @@ public class Program
 
 Pretty neat so far huh? But now, let’s face the 2.times code.
 
-#### Example 2: Create a ruby style iterator
+## Example 2: Create a ruby style iterator
 
 <pre><code class="language-csharp">
 public static class IntegerExtensions

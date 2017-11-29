@@ -13,7 +13,7 @@ methods](http://msdn.microsoft.com/en-us/library/0yw3tz5k(VS.80).aspx)
 much more readable. With that in mind, we can make our `Times` method
 much nicer.
 
-#### Example 1: Ruby style iterator with lambda expression
+## Example 1: Ruby style iterator with lambda expression
 
 <pre><code class="language-csharp">
 2.Times( number =&gt; { Console.WriteLine("&gt; " + number); } ); 
@@ -21,7 +21,7 @@ much nicer.
 
 Compared to the former syntax, it increases readability considerably.
 
-#### Example 2: Ruby style iterator with bare delegate
+## Example 2: Ruby style iterator with bare delegate
 
 <pre><code class="language-csharp">
 2.Times( 
