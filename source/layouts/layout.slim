@@ -26,6 +26,8 @@ html
 
     .content.animated.fade-in
       .content-container
+        - if current_page.url != '/'
+          .article-date= current_page.date.strftime('%b %d, %Y')
         = yield
 
     .content

@@ -3,6 +3,7 @@ $screen-xs: 480px
 $spacing: 60px
 $spacing-medium: $spacing / 2
 $spacing-small: $spacing / 4
+$spacing-tiny: $spacing / 6
 
 $font-size-large: 20px
 $font-size-medium: 16px
@@ -226,3 +227,9 @@ a.article-link-title-link
 
   @media (min-width: $screen-xs)
     font-size: $font-size-medium
+
+.article-date
+  white-space: nowrap
+  color: $color-text-2
+  font-size: $font-size-medium
+  margin: 0 0 $spacing-tiny 0
