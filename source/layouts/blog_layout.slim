@@ -1,0 +1,10 @@
+- content_for :before_title
+  = "#{current_page.data.title} ← "
+
+- content_for :before_page_title
+  = link_to '/', class: 'h1-back' do
+    = inline_svg 'arrow-left'
+
+= wrap_layout :layout do
+  .article-date= current_page.date.strftime('%b %d, %Y')
+  = yield

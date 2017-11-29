@@ -4,7 +4,10 @@ html
     meta charset="utf-8"
     meta http-equiv="x-ua-compatible" content="ie=edge"
     meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    title= [current_page.data.title, 'Koffeinfrei | Alexis Reigel'].compact.join(' ← ')
+    title
+      = yield_content :before_title
+      | Koffeinfrei | Alexis Reigel
+
     = stylesheet_link_tag 'normalize'
     = stylesheet_link_tag 'site'
     = stylesheet_link_tag 'prism'
@@ -18,16 +21,11 @@ html
         .headline free software, web technologies and heavy metal coding (and ruby of course)
 
         h1
-          - if current_page.url != '/'
-            = link_to '/', class: 'h1-back' do
-              = inline_svg 'arrow-left'
-
-          .h1-text= current_page.data.page_title || current_page.data.title
+          = yield_content :before_page_title
+          .h1-text= current_page.data.title
 
     .content.animated.fade-in
       .content-container
-        - if current_page.url != '/'
-          .article-date= current_page.date.strftime('%b %d, %Y')
         = yield
 
     .content
