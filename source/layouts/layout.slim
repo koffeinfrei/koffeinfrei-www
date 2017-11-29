@@ -21,7 +21,8 @@ html
           - if current_page.url != '/'
             = link_to '/', class: 'h1-back' do
               = inline_svg 'arrow-left'
-          = current_page.data.page_title || current_page.data.title
+
+          .h1-text= current_page.data.page_title || current_page.data.title
 
     .content.animated.fade-in
       .content-container
