@@ -5,8 +5,8 @@ pageable: false
 
 ul.blank
   - page_articles.each_with_index do |article, i|
-    li.log-item.animated.sequentially.fade-in-up
-      .log-item-title
-        = link_to article.title, article, class: 'log-item-title-link'
-      .log-item-date
+    li.article-link.animated.sequentially.fade-in-up
+      .article-link-title
+        = link_to article.title, article, class: 'article-link-title-link'
+      .article-link-date
         = article.date.strftime('%b %d, %Y')
