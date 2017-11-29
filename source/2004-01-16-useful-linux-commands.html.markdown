@@ -79,7 +79,7 @@ $ echo "set bell-style none"&gt;&gt; ~/.inputrc
 For all users (you have to be root) in `/etc/inputrc` set the line
 `set bell-style none`
 
-#### Convert a text file from [DOS]{.caps} to Unix style
+#### Convert a text file from DOS to Unix style
 
 This tool converts dos formatted text files with end-of-line `^M^J` to
 unix end-of-line `^J`.
@@ -129,7 +129,7 @@ the safe way to clear the contents of the file.
 $ :&gt;file-to-be-cleared
 </code></pre>
 
-#### Merge two PostScript or [PDF]{.caps} files
+#### Merge two PostScript or PDF files
 
 <pre><code class="language-bash">
 $ gs -q -dNOPAUSE -dBATCH -sDEVICE=pswrite -sOutputFile=merge.ps -f file1.ps file2.ps

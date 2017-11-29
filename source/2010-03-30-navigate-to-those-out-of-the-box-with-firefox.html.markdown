@@ -12,7 +12,7 @@ bookmarking](http://lifehacker.com/196779/hack-attack-firefox-and-the-art-of-key
 
 What I have now are shortcuts to all my often used search sites. To search in
 wikipedia e.g. I type `CTRL + L` (shortcut for placing the cursor in the
-[URL]{.caps} bar in firefox), then type `wp asdf` and there I go.
+URL bar in firefox), then type `wp asdf` and there I go.
 
 I guess this fact renders [my previously posted quick link access
 tool](/2009/05/15/navigate-to-those-urls-over-and-over-again) obsolete…

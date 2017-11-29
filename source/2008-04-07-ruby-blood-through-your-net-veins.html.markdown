@@ -19,7 +19,7 @@ classes dynamically, without the need to subclass.
 
 My first thought was, let’s .NET look more like ruby, in respect to its fully
 object oriented data types. In ruby you could write `2.times {...}` to create a
-neat loop. In .[NET]{.caps}, this is now possible too! You just have to write a
+neat loop. In .NET, this is now possible too! You just have to write a
 static class with static methods, where its first paramater is prefixed with
 `this`. The first parameter defines the class type the method is added to.
 That’s it. You can even overload methods. And, the newly created methods popup
