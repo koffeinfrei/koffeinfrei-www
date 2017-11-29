@@ -29,6 +29,8 @@ end
 configure :build do
   activate :minify_css
   activate :minify_javascript
-  activate :gzip
+  activate :gzip do |options|
+    options.exts << '.json'
+  end
   activate :imageoptim
 end
