@@ -1,0 +1,67 @@
+==================================================================
+https://keybase.io/koffeinfrei
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://www.koffeinfrei.org
+  * I am koffeinfrei (https://keybase.io/koffeinfrei) on keybase.
+  * I have a public key with fingerprint 26F1 300F 4F40 F679 66F0  A62D B0B7 DE56 128A 5B8F
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "26f1300f4f40f67966f0a62db0b7de56128a5b8f",
+            "host": "keybase.io",
+            "key_id": "b0b7de56128a5b8f",
+            "kid": "01013a075a4d45f2bef387f8d95a36f3114c4051c3c80a1d8fcde05a58fbf4ce782f0a",
+            "uid": "4dbbf6d6ab3990475ef15340bf38ef19",
+            "username": "koffeinfrei"
+        },
+        "service": {
+            "hostname": "www.koffeinfrei.org",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1429042693,
+    "expire_in": 157680000,
+    "prev": "1c756f6937ac591f91ccd43593d08067ba4097907052a84e3344e285f602029a",
+    "seqno": 4,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.8
+Comment: https://keybase.io/crypto
+
+yMIdAnicbZJrSBVBFMfvTa2UhEACKSJbMAh8zO7O7ONChNGHKKFCRRTxMrs7o9vV
+3evuvdfEpKTSjL5kaNFLhEQrehk+MsxHovawIiyFkJCgB0F9kISgslkp6EPzZWbO
++f9/c+ZwxpLjfEn+EXl0S0XnqoD/ycjuqK8gM5ZQy2m2UcMFarkQWd6oaZURJ+yY
+VoQLcIJEeREACikEVJJVSaIAS4KhAU02CJJ4QcFIUyiXwZXbrudgGA27JMu0WYxd
+gqbBov/Rh5YTgAe8iIGMMDQgooJGqKjIVDFUhEWJijwPdQgQr4u6AjBvKFQ3CEAY
+KVSjUCeyIrCKGC66jIOGplHJkLAmqiqAMiKURyIEGqOyo+oJXeJYuJJ4tdqUEtOi
+DjG5ugyOJWKmTrwueJ/5I6qurs76R5hlO2WMEnbsiK3bFUxQHomEA54/UhNeNhAt
++AcV1EzLYA1lhhhxXNO2uADPlHrE9Ng8FFiRgqSKGRw5GDYdEjQ9BZIlBbDlPUNi
+DMnrMpIo08lYRypPVV7XDSgiVTSAAiRZwxCosgpkgASsQCKKEBJBQVQCAhBUrz8u
+qbJsLgBZmbiMIV2zzMKRqEO4utHhknifP8m3MmGFNxK+pMS1fwdlQljtazXarLHu
+m51yYfOL5vpH+fLzKziYM7g//+DrQXsqlIzuT+e6VecqZzempKXsP7N+cvbrjTuL
+fW9TbzSHjo5H03NOhzrSaPm2HPnkt9IH+s6Oyb17G5+dL4475uqH2gsuTe86kZ3Y
+2eXfl9LQkDvTPfAp/WLz3f4LvQ9/RtPm58bbX/4YGtoerWit5ovq17yT5ooPJGxO
+nD8y2XavZWagteTy47bNT09ttQp/2KWZLf7GHvfD8V/2Z/yxe2ndwpmrRdel3rm0
+pLM009B7FgumUGrerYkNILakbLIOZ78fuU2ya/L6fdd2LHQqfXldTfNH41u+DH9f
+2pOcqE71Nr5pevUbKT8tWQ==
+=UVDC
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/koffeinfrei
+
+==================================================================
