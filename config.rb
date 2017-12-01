@@ -1,3 +1,5 @@
+require 'lib/minify_json'
+
 activate :autoprefixer do |prefix|
   prefix.browsers = "last 2 versions"
 end
@@ -29,6 +31,7 @@ end
 configure :build do
   activate :minify_css
   activate :minify_javascript, inline: true
+  activate :minify_json
   activate :gzip do |options|
     options.exts << '.json'
   end
