@@ -1,7 +1,8 @@
-# redirect to www
-RewriteEngine On
+# redirect to www and https
+RewriteEngine on
+RewriteCond %{HTTPS} off [OR]
 RewriteCond %{HTTP_HOST} !^www\. [NC]
-RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
 # gzip encoding
 <Files *.css.gz>
