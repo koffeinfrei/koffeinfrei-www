@@ -129,4 +129,4 @@ and running with ruby 2.5.0. Each iteration is performing a serialization and a
 subsequent deserialization.
 
 The whole benchmark code is available [as a
-gist](https://gist.github.com/koffeinfrei/44a2782a28c5a935574c2df4e72490c0/edit).
+gist](https://gist.github.com/koffeinfrei/44a2782a28c5a935574c2df4e72490c0).
