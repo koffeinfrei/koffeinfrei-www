@@ -14,6 +14,10 @@ activate :blog do |blog|
   blog.layout = 'blog_layout'
 end
 
+# imageoptim needs to come first, otherwise the built html files don't contain
+# the asset hashes in the image urls
+activate :imageoptim
+
 activate :directory_indexes
 
 # the block config `activate :asset_hash do |opts|` doesn't work for
@@ -35,5 +39,4 @@ configure :build do
   activate :gzip do |options|
     options.exts << '.json'
   end
-  activate :imageoptim
 end
