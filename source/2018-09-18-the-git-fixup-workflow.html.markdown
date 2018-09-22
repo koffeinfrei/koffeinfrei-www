@@ -18,7 +18,7 @@ pull or merge requests, has become the standard way to work with Git and GitHub
 or GitLab (or Bitbucket even) for many developer teams. Besides the main
 advantages of this way of working it also enables developers to keep a clean
 Git history (see also [5 rules to Git
-better](https://blog.panter.ch/2016/08/31/5-rules-to-git-better.html)).
+better](/2016/11/10/5-rules-to-git-better/)).
 
 Let's assume the following as a starting point for the suggested workflow in
 this post:
