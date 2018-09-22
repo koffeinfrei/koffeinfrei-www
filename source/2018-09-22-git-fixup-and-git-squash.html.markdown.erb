@@ -1,0 +1,42 @@
+---
+
+title: Git fixup and Git squash
+date: 2018-09-22 09:03 UTC
+tags:
+
+---
+
+Related to my blogpost [The Git fixup
+workflow](/2018/09/18/the-git-fixup-workflow/) [I wrote two git
+scripts](https://github.com/koffeinfrei/dotfiles/commit/55d54c5c201b398dca1af359f44e0a5161c17bfa)
+`git fixup` and `git squash` to support that workflow.
+
+Both scripts assume that you are working on a separate branch (feature branch)
+from your default branch (which is mostly `master`).
+
+## 1. Git fixup
+
+This script is a substitute for `git commit --fixup <COMMIT HASH>`. The problem
+with using `--fixup` is that it requires you to first get the hash of the
+commit you wish to fixup to and provide it as an argument.
+
+This script removes
+that burden by relying on
+[selecta](https://github.com/garybernhardt/selecta) to provide a list of all
+previous commits in the current branch. The selected commit will then be used
+to create a fixup commit for.
+
+<%= image_tag('2018-09-22-git-fixup-and-git-squash/git-fixup.png') %>
+
+[Git fixup in my dotfiles](https://github.com/koffeinfrei/dotfiles/blob/master/bin/git-fixup)
+
+## 2. Git squash
+
+This script is a substitute for `git rebase -i --autosquash`. The problem with
+squashing all fixup commits is that you have to find the earliest commit you
+want to rebase onto.
+
+This script rebases to the first commit in the current branch and squashes all
+fixup commits.
+
+[Git squash in my dotfiles](https://github.com/koffeinfrei/dotfiles/blob/master/bin/git-squash)

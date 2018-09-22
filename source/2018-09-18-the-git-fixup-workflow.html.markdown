@@ -223,3 +223,8 @@ applied globally. The rebase command still requires `-i` though.
 <pre><code class="language-shell">
 $ git config --global rebase.autoSquash true
 </code></pre>
+
+## Edit (2018-09-18)
+
+I wrote two git scripts `git fixup` and `git squash` to support this workflow
+and added a [blog post describing them](/2018/09/22/git-fixup-and-git-squash/).
