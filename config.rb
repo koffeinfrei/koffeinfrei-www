@@ -9,6 +9,9 @@ page '/*.json', layout: false
 page '/*.txt', layout: false
 page '/*.atom', layout: false
 
+set :markdown_engine, :redcarpet
+set :markdown, fenced_code_blocks: true, smartypants: true
+
 activate :blog do |blog|
   blog.permalink = "{year}/{month}/{day}/{title}.html"
   blog.layout = 'blog_layout'
