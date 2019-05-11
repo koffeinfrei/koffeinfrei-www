@@ -118,3 +118,10 @@ Symbol | Meaning
 
 You can see the whole thing in action in [my
 .bash\_profile](https://github.com/koffeinfrei/dotfiles/blob/master/.bash_profile#L64-87).
+
+## Update 2019-05-11
+
+I extracted the bash and the git prompt to their own projects:
+
+- [Git prompt for bash](https://github.com/koffeinfrei/bash-git-prompt)
+- [Bash prompt](https://github.com/koffeinfrei/bash-prompt)
