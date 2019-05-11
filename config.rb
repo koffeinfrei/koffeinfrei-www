@@ -32,6 +32,9 @@ activate :livereload
 helpers do
   def inline_svg(name)
     File.read(File.join('source', 'images', "#{name}.svg"))
+      .gsub("\n", '')
+      .gsub(/\s+/, ' ')
+      .gsub('> <', '><')
   end
 end
 
