@@ -36,3 +36,8 @@ The actual seed could look something like this.
 <script src="https://gist.github.com/koffeinfrei/04bbe38f16ff9d49bebd.js?file=seeds.rb"></script>
 
 That's it. Now execute `rake db:seed` a few times to get back your confidence in your seeds.
+
+#### EDIT
+
+I packed the contents of this post into a gem called
+[SeedBox](https://github.com/panter/seed_box).
