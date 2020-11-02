@@ -1,5 +1,5 @@
 doctype html
-html
+html lang="en"
   head
     meta charset="utf-8"
     meta http-equiv="x-ua-compatible" content="ie=edge"
@@ -12,6 +12,7 @@ html
     link rel="manifest" href="/site.webmanifest"
     meta name="msapplication-TileColor" content="#da532c"
     meta name="theme-color" content="#ffffff"
+    meta name="description" content="Personal blog of software developer Alexis Reigel containing posts about stuff. Free software, web technologies and heavy metal coding (and ruby of course)."
 
     = feed_tag :atom, "#{blog.options.prefix.to_s}/posts.atom", title: 'Atom Feed'
     title
@@ -29,7 +30,7 @@ html
     header.animated.fade-in
       .content-container
         = link_to '/' do
-          img.avatar src='https://www.gravatar.com/avatar/8342950f34a66d9ec7cfe10b33d5494c?s=100'
+          img.avatar alt='Homepage' src='https://www.gravatar.com/avatar/8342950f34a66d9ec7cfe10b33d5494c?s=100'
 
         .headline free software, web technologies and heavy metal coding (and ruby of course)
 
