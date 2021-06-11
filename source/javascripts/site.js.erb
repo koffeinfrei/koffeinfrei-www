@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function(event) {
+  //
+  // quotes
+  //
   fetch('<%= asset_url('quotes.json') %>')
     .then(function(response) {
       return response.json();
@@ -8,5 +11,23 @@ document.addEventListener('DOMContentLoaded', function(event) {
       var randomQuoteElement = document.querySelector('.js-random-quote');
       randomQuoteElement.innerHTML = randomQuote.quote + '\n\n' + (randomQuote.author || 'Unknown');
       randomQuoteElement.classList.add('animated', 'fade-in')
+    });
+
+    //
+    // dark mode
+    //
+    if (localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark');
+    }
+
+    document.querySelector('.theme-switcher').addEventListener('click', function() {
+      if (document.body.classList.contains('dark')) {
+        document.body.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      }
+      else {
+        document.body.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
     });
 });

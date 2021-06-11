@@ -27,6 +27,12 @@ html lang="en"
 
     = partial 'piwik'
   body
+    .theme-switcher
+      .theme-switcher-light
+        = inline_svg 'sun'
+      .theme-switcher-dark
+        = inline_svg 'moon'
+
     header.animated.fade-in
       .content-container
         = link_to '/' do

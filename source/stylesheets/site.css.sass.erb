@@ -9,9 +9,17 @@ $font-size-large: 20px
 $font-size-medium: 16px
 $font-size-small: 14px
 
-$color-text-1: #000
-$color-text-2: rgba($color-text-1, 0.7)
-$color-text-3: rgba($color-text-1, 0.5)
+$color-background-light: #fff
+$color-primary-light: #216f1a
+$color-text-1-light: #000
+$color-text-2-light: lighten($color-text-1-light, 30%)
+$color-text-3-light: lighten($color-text-1-light, 50%)
+
+$color-background-dark: #2e3436
+$color-primary-dark: #7ed276
+$color-text-1-dark: #fff
+$color-text-2-dark: darken($color-text-1-dark, 10%)
+$color-text-3-dark: darken($color-text-1-dark, 20%)
 
 @font-face
   font-family: 'Bespoke-c90qhHYNza'
@@ -23,6 +31,20 @@ $color-text-3: rgba($color-text-1, 0.5)
 //
 
 body
+  --color-background: #{$color-background-light}
+  --color-text-1: #{$color-text-1-light}
+  --color-text-2: #{$color-text-2-light}
+  --color-text-3: #{$color-text-3-light}
+  --color-primary: #{$color-primary-light}
+
+  &.dark
+    --background-color: #{$color-background-dark}
+    --color-text-1: #{$color-text-1-dark}
+    --color-text-2: #{$color-text-2-dark}
+    --color-text-3: #{$color-text-3-dark}
+    --color-primary: #{$color-primary-dark}
+
+  background: var(--background-color)
   font-family: 'Bespoke-c90qhHYNza'
   line-height: 1.7
   padding: $spacing $spacing-small
@@ -50,15 +72,15 @@ pre
 .content-container
   max-width: 860px
   margin: auto
-  color: $color-text-1
+  color: var(--color-text-1)
   font-size: $font-size-medium
 
 a
-  color: $color-text-2
+  color: var(--color-text-2)
 
   &:focus,
   &:hover
-    color: $color-text-3
+    color: var(--color-text-3)
 
 ul
   &.blank
@@ -69,12 +91,12 @@ ul
       list-style: none
 
 blockquote
-  color: $color-text-3
+  color: var(--color-text-3)
   // we need to add a little bit more bottom margin than to the <p> for visual
   // reasons
   margin: 0 0 $spacing-small + $spacing-tiny 0
   padding: $spacing-tiny 0 $spacing-tiny $spacing-medium
-  border-left: 2px solid rgba($color-text-1, 0.2)
+  border-left: 2px solid var(--color-text-3)
   font-style: oblique
 
   &.simple-format
@@ -92,7 +114,7 @@ table
   margin: 0 0 $spacing-small 0
 
 td, th
-  border: 1px solid $color-text-1
+  border: 1px solid var(--color-text-1)
   padding: $spacing-tiny
 
 img
@@ -112,7 +134,8 @@ img
 
 .h1-back
   display: block
-  color: $color-text-1
+  color: var(--color-text-1)
+  fill: currentColor
 
   @media (min-width: $screen-xs)
     position: absolute
@@ -122,6 +145,27 @@ img
     height: $font-size-large
     width: $font-size-large
 
+.theme-switcher
+  position: absolute
+  top: $spacing-small
+  right: $spacing-small
+  cursor: pointer
+
+  .theme-switcher-light
+    display: none
+
+  .theme-switcher-dark
+    display: block
+
+  .dark &
+    color: $color-text-1-dark
+
+    .theme-switcher-light
+      display: block
+
+    .theme-switcher-dark
+      display: none
+
 //
 // header
 //
@@ -130,7 +174,7 @@ img
   border-radius: 50%
 
 .headline
-  color: $color-text-2
+  color: var(--color-text-2)
   margin: 0 0 $spacing 0
 
 //
@@ -226,7 +270,7 @@ li.article-link
     margin-right: $spacing-medium
 
 a.article-link-title-link
-  color: #216f1a
+  color: var(--color-primary)
   text-decoration: none
 
   &:focus,
@@ -235,7 +279,7 @@ a.article-link-title-link
 
 .article-link-date
   white-space: nowrap
-  color: $color-text-2
+  color: var(--color-text-2)
   font-size: $font-size-small
   margin: 0 0 $spacing-small
 
@@ -244,7 +288,7 @@ a.article-link-title-link
 
 .article-date
   white-space: nowrap
-  color: $color-text-2
+  color: var(--color-text-2)
   font-size: $font-size-medium
   margin: 0 0 $spacing-tiny 0
 
