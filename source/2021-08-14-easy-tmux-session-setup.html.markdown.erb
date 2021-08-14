@@ -1,0 +1,71 @@
+---
+
+title: Easy tmux session setup
+date: 2021-08-14 18:46 UTC
+
+---
+
+For development I need a certain tmux setup, which I don't want to kick off
+every time time manually. I used to use
+[Tmuxinator](https://github.com/tmuxinator/tmuxinator) to manage my tmux
+session setup. For mainly two reasons I switched away from it though. To be
+clear, none of them are the tools' fault.
+
+1. I don't need a per project setup
+1. My setup is fairly simple, which doesn't really justify the dependency
+
+What I now have is a bash script that sets up my tmux session with all the
+windows and split panes bootstrapped and tools running that I usually need.
+Since my setup isn't very complicated using tmux commands is enough and I don't
+need the declarative yaml structure that Tmuxinator provides.
+
+This is my annotated [tmux-dev](https://github.com/koffeinfrei/dotfiles/blob/master/bin/tmux-dev) script:
+
+```language-bash
+#!/usr/bin/env bash
+
+# Create a tmux session
+tmux new-session -d
+
+# Start vim in the first window
+tmux send-keys 'vim' C-m
+
+# Create a 2nd window
+tmux new-window
+
+# Create a horizontal split in the 2nd window, with 75% / 25% width distribution
+tmux split-window -h -p 25
+
+# Start `git watch-status` in the right split
+tmux send-keys 'git watch-status' C-m
+
+# Split the right split vertically
+tmux split-window -v
+
+# Start `git watch-log` in the right bottom split
+tmux send-keys 'git watch-log' C-m
+
+# Focus the left split pane
+tmux select-pane -t 0
+
+# Create a 3rd window, without running a command
+tmux new-window
+
+# Go to the 1st window (vim) and put the focus on it
+tmux select-window -t 0
+tmux select-pane -t 0
+
+# Attach the session. Ready to start hacking
+tmux -2 attach-session -d
+```
+
+This is what the tmux session from the above script looks like:
+
+<%= image_tag('2021-08-14-easy-tmux-session-setup/screen.jpg') %>
+
+The most important commands to define the setup are the following:
+
+- `new-window`: Create a new window
+- `split-window -h`: Create a horizontal split pane
+- `split-window -v`: Create a vertical split pane
+- `send-keys`: Execute a command, i.e. start a program
