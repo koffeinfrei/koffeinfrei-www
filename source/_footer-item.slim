@@ -1,4 +1,4 @@
 li.footer-item
-  = link_to link, class: 'footer-item-link' do
+  = link_to link, { class: 'footer-item-link' }.merge(locals.fetch(:link_attributes, {})) do
     .footer-item-link-logo= inline_svg(svg)
     .footer-item-link-text= text

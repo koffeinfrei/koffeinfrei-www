@@ -58,6 +58,7 @@ html lang="en"
         ul.blank.footer-items
           = partial 'footer-item', locals: { link: 'https://gitlab.com/koffeinfrei', text: 'GitLab', svg: 'gitlab-logo' }
           = partial 'footer-item', locals: { link: 'https://github.com/koffeinfrei', text: 'GitHub', svg: 'github-logo' }
+          = partial 'footer-item', locals: { link: 'https://mastodon.social/@koffeinfrei', text: 'Mastodon', svg: 'mastodon-logo', link_attributes: { rel: "me" } }
           = partial 'footer-item', locals: { link: 'https://twitter.com/alexisreigel', text: 'Twitter', svg: 'twitter-logo' }
           = partial 'footer-item', locals: { link: 'https://www.linkedin.com/in/alexis-reigel/', text: 'LinkedIn', svg: 'linkedin-logo' }
 
