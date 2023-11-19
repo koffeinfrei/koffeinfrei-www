@@ -1,0 +1,167 @@
+---
+
+title: Share to PWA from mobile
+date: 2023-11-19 17:20 UTC
+tags:
+
+---
+
+If you have a website that can be installed as a
+[PWA](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps) on
+your mobile device it has also the ability to receive data from the "share to"
+functionality on mobile phones. Depending on what you're trying to do you don't
+need to create a native app.
+
+This article shows how I made use of this for [unnote](https://www.unnote.io).
+
+<%= image_tag '2023-11-19-share-to-pwa-from-mobile.html.jpg' %>
+
+There are 3 things that are needed as part of your application to make this work:
+
+1. Update your manifest to support "share to"
+2. Handle the "share to" request in your service worker
+3. Handle the shared data in your app
+
+Let's go through each part in some detail.
+
+## 1. Manifest
+
+You need to add a new entry
+[share_target](https://developer.mozilla.org/en-US/docs/Web/Manifest/share_target)
+to your `manfest.json`. The following manifest allows any text data and all
+types of images to be sent to your application.
+
+```language-json
+"share_target": {
+  "action": "/share-target/",
+  "method": "POST",
+  "enctype": "multipart/form-data",
+  "params": {
+    "title": "title",
+    "text": "text",
+    "url": "url",
+    "files": [
+      {
+        "name": "image",
+        "accept": ["image/*"]
+      }
+    ]
+  }
+}
+```
+
+1. `action` is the URL that will receive the data. This will be explained in
+   the next chapter about the service worker.
+2. `params` represent the different ways the mobile phone sends the data
+   1. `title` is provided when a document is shared
+   2. `text` contains the contents of the shared document
+   3. `url` is provided when a resource with a URL (as e.g. a website) is shared
+   4. `files` is provded when a binary file is shared. The definition accepts
+      an array of mimetypes that your aplication should accept.
+
+Depending on what data your application should be able to receive you don't
+need to configure all the `params`. `files` is only needed when you want to
+support binary data.
+
+## 2. Service Worker
+
+The following is a minimal service worker that intercepts the URL
+`/share-target/` which was previously configured in the manifest. It then puts
+the data in the
+[caches](https://developer.mozilla.org/en-US/docs/Web/API/caches), which is a
+global
+[CacheStorage](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage)
+in the browser.
+
+```language-js
+self.addEventListener('fetch', (event) => {
+  if (event.request.url.endsWith('/share-target/') && event.request.method === 'POST') {
+    return event.respondWith(
+      (async () => {
+        const formData = await event.request.formData();
+        const image = formData.get('image');
+        const title = formData.get('title');
+        const text = formData.get('text');
+        const url = formData.get('url');
+
+        const cache = await caches.open('media');
+
+        if (image) {
+          await cache.put('shared-image', new Response(image));
+        } else {
+          await cache.put('shared-data', new Response(JSON.stringify({ title, text, url })));
+        }
+        return Response.redirect('/#/handle-share-target', 303);
+      })(),
+    );
+  }
+});
+```
+
+The service worker handles images and text data differently, and uses two
+separate cache keys. The text data is stored as JSON, while the image is stored
+as a [Response](https://developer.mozilla.org/en-US/docs/Web/API/Response).
+
+Note that the intercepted request won't make it to your server. The last
+statement makes a client side redirect to where your application will actually
+handle the received data.
+
+## 3. Application
+
+The last part is the actual application fetching the data from the cache and
+doing whatever you want to do with it.
+The following two functions are helpers to extract the json data and the binary
+image data from the cache.
+
+```language-js
+export async function getBlob(name) {
+  const cache = await caches.open('media')
+
+  const image = await cache.match(name)
+  if (image) {
+    const blob = await image.blob()
+    await cache.delete(name)
+
+    return blob
+  }
+}
+
+export async function getJson(name) {
+  const cache = await caches.open('media')
+
+  const data = await cache.match(name)
+  if (data) {
+    const json = await data.json()
+    await cache.delete(name)
+
+    return json
+  }
+}
+```
+
+The next part is the application specific part. The following shows how to use
+the previous functions to retrieve the data.
+
+```language-js
+const blob = await getBlob('shared-image')
+```
+
+You could e.g. [convert the blob to an
+image](https://github.com/koffeinfrei/unnote/blob/ac46bb59a9f8b291ac645e0a6cd6f84f45de25d5/client/src/image.js#L1)
+or [resize the
+image](https://github.com/koffeinfrei/unnote/blob/ac46bb59a9f8b291ac645e0a6cd6f84f45de25d5/client/src/image.js#L20).
+
+The last piece of code shows how to extract the properties from the cached
+JSON.
+
+```language-js
+const { title, text, url }  = await getJson('shared-data')
+```
+
+## Links
+
+- [unnote's manifest.json](https://github.com/koffeinfrei/unnote/blob/ac46bb59a9f8b291ac645e0a6cd6f84f45de25d5/client/public/manifest.json#L52-L67)
+- [unnote's service worker](https://github.com/koffeinfrei/unnote/blob/ac46bb59a9f8b291ac645e0a6cd6f84f45de25d5/client/public/service-worker.js#L2-L22)
+- [unnote's data handling](https://github.com/koffeinfrei/unnote/blob/ac46bb59a9f8b291ac645e0a6cd6f84f45de25d5/client/src/NoteEdit.svelte#L82-L94)
+- [Handling shared data from other apps (MDN)](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/How_to/Share_data_between_apps#handling_shared_data_from_other_apps)
+- [Web Share Demo](https://github.com/GoogleChrome/samples/blob/gh-pages/web-share/README.md#web-share-demo)
