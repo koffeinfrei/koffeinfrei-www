@@ -4,6 +4,3 @@
 .sass-cache
 build/
 .env
-
-# deploy script
-/deploy.sh
