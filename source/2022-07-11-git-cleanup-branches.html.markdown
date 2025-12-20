@@ -32,7 +32,7 @@ The script consists of 3 steps:
 
 A sample session could look like this:
 
-```language-bash
+```language-none
  ~/src/example ⑂ main ? = ➜ git cleanup-branches
 No local changes to save
 Already on 'main'
