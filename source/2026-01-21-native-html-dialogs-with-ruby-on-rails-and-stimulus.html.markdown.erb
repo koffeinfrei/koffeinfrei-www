@@ -1,0 +1,85 @@
+---
+
+title: Native HTML dialog with Ruby on Rails and Stimulus
+date: 2026-01-21 17:15 UTC
+tags:
+
+---
+
+[The &lt;dialog&gt;
+element](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/dialog)
+is widely available, which means that we don't really need third party
+libraries just to be able to add dialogs (aka. modals) to a web application.
+Using it with Rails and Stimulus is very easy.
+
+The following HTML snippet shows a minimal markup defining the dialog and
+adding the stimulus controller directives.<br>
+The dialog won't show up before triggering it with `showModal`.<br>
+It can then be closed by either clicking the button or by hitting the `ESC`
+key.
+
+<pre><code class="language-html">
+&lt;div data-controller='dialog'&gt;
+  &lt;button data-action='dialog#open'&gt;Open dialog&lt;/button&gt;
+
+  &lt;dialog data-dialog-target='dialog'&gt;
+    &lt;p&gt;
+      Content of the dialog
+    &lt;/p&gt;
+
+    &lt;button data-action='dialog#close'&gt;Close dialog&lt;/button&gt;
+  &lt;/dialog&gt;
+&lt;/div&gt;
+</code></pre>
+
+The corresponding stimulus controller is absolutely trivial.
+
+<pre><code class="language-js">
+// file: controllers/dialog_controller.js
+
+import { Controller } from "@hotwired/stimulus";
+
+export default class extends Controller {
+  static targets = ["dialog"];
+
+  open() {
+    this.dialogTarget.showModal();
+  }
+
+  close() {
+    this.dialogTarget.close();
+  }
+}
+
+</code></pre>
+
+I also added some CSS to make the dialog look a bit nicer. Most notable is the
+`::backdrop` definition, which adds a semi transparent backdrop, and the drop
+shadow `box-shadow`, which make it stand out a bit more.
+
+<pre><code class="language-scss">
+dialog {
+  background-color: $color-background;
+  border: none;
+  box-shadow: 0 0 10px #000;
+  color: $color-text;
+
+  &::backdrop {
+    background-color: #000000bf;
+  }
+}
+</code></pre>
+
+## In the wild
+
+The code above is an extract of the dialogs I added to [Should I Watch
+This?](https://www.should-i-watch-this.com)
+
+<%= image_tag('2026-01-21-native-html-dialogs-with-ruby-on-rails-and-stimulus/dialog.jpg') %>
+
+You can have a look at the [markup of the rating
+dialog](https://github.com/koffeinfrei/should-i-watch-this/blob/b91cfed9bcb298c4396dac3acfb0a253574025c0/www/app/views/movies/show.html.slim#L27-L51),
+the [stimulus
+controller](https://github.com/koffeinfrei/should-i-watch-this/blob/b91cfed9bcb298c4396dac3acfb0a253574025c0/www/app/frontend/controllers/dialog_controller.js)
+and the
+[CSS](https://github.com/koffeinfrei/should-i-watch-this/blob/b91cfed9bcb298c4396dac3acfb0a253574025c0/www/app/frontend/entrypoints/application.scss#L529-L538).
