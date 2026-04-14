@@ -1,0 +1,160 @@
+---
+
+title: How I built a movie platform with Wikidata
+date: 2026-04-14 14:12 UTC
+tags:
+
+---
+
+[Should I Watch This?](https://www.should-i-watch-this.com) is a web
+application that gives a recommendation about a movie or show. For this it gets
+the ratings of [Rotten Tomatoes](https://www.rottentomatoes.com),
+[IMDb](https://www.imdb.com/) and [metacritic](https://www.metacritic.com/) and
+generates a consolidated recommendation based on those third party scores. To
+achieve that it needs a database of movies in the first place.
+
+## Should I Watch This?: Origins
+
+The initial version of Should I Watch This? used the [OMDb
+API](https://www.omdbapi.com) as the source for movie data. The OMDb API is
+unfortunately proprietary, which is not a dependency I wanted to keep in the
+long run. The movie data is at the core of the application. Furthermore, OMDb
+API is an API. This means that there's network latency and potential failure
+for every data request. For an autocomplete search for example that's not
+really suitable, both in terms of speed and in terms of the API rate limits.
+
+After combing the internet for an alternative I came across
+[Wikidata](https://www.wikidata.org):
+
+> Wikidata acts as central storage for the structured data of its Wikimedia
+sister projects including Wikipedia, Wikivoyage, Wiktionary, Wikisource, and
+others.
+
+The data is licensed under [CC0 1.0
+Universal](https://creativecommons.org/publicdomain/zero/1.0/), which means
+anyone can use the data freely.
+
+## Wikidata data
+
+There are different ways to access Wikidata's data, including different APIs.
+To avoid rate limits and having full flexibility of how to transform the data
+to my desired data structured I went with the [JSON
+dump](https://www.wikidata.org/wiki/Wikidata:Database_download#JSON_dumps_(recommended)).
+The downside of this is that the file is around 93GB in size, and I'd need a
+pipeline to transform the data.
+
+## Data dump pipeline
+
+The whole pipeline takes around 12 hours.
+
+## 1. Download the full Wikidata data dump
+
+As already mentioned this is a 93GB download. This is the slowest part and
+can't really be optimized. We just have to wait for the download to be
+complete. 
+
+Duration: 6.8h
+
+## 2. Decompress and reduce the dump
+
+The compressed dump is very large and contains everything on Wikidata. I'm only
+interested in "film" and "humans" entries. The "human" entries are needed for
+the actors and directors. Instead of decompressing the whole dump and use up
+unnecessary disk space the dump is prefiltered on decompression using
+[ripgrep](https://github.com/BurntSushi/ripgrep). Another reason for
+preprocessing the dump is that it'll need two passes to extract the "film" and
+"human" entries. Going through the full dump would take considerably longer.
+Since the dump is made up of one json entry per line it's easy to reduce the
+dump by line.
+
+The following is the reduced command that creates the reduced dump. The pattern
+passed to rg is a lot longer:
+
+<pre><code class="language-shell">
+lbzcat latest-all.json.bz2 | \
+  rg '(\"Q5\"|\"Q100707163\"|\"Q101071244\"|\"Q101716172\"|\"Q101973724\"|...)' \
+  > latest-all-reduced.json
+</code></pre>
+
+The pattern contains the "human" identifier and all instances and sub instances
+of film and series. By querying the [SPARQL query
+service](https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help)
+we first obtain a list of all relevant instance identifiers.
+
+<pre><code class="language-sparql">
+SELECT DISTINCT ?film ?filmLabel WHERE {
+  {
+    ?film wdt:P279* wd:Q11424 .
+  }
+  UNION
+  {
+    ?film wdt:P279* wd:Q5398426 .
+  }
+}
+</code></pre>
+
+Since this is only a grep based filtering, it's not exact. The next steps will
+do the proper filtering.
+
+Duration: 4.2h
+
+## 3. Generate movies and humans file
+
+These two separate steps both use
+[wikibase-dump-filter](https://github.com/maxlath/wikibase-dump-filter) to
+extract only the relevant entries.
+
+The following is the resulting command for the "film" entries:
+
+<pre><code class="language-shell">
+cat latest-all-reduced.json | \
+  parallel --pipe --block 100M --line-buffer "npx wikibase-dump-filter --claim tmp/wikibase-dump-filter-movies-claim" \
+  > #{output_file}
+</code></pre>
+
+- The file `wikibase-dump-filter-movies-claim` contains a list of the film
+  instance and all its sub instances identifiers. This is the main mechanism to
+  filter the Wikidata entries.
+- Using
+  [parallel](https://www.gnu.org/software/parallel/parallel_tutorial.html)
+  speeds up the process a bit, going from 23min to 20min.
+
+The human file is very large, and we need the humans as a base dataset for each
+movie's directors and actors. With [jq](https://jqlang.org/) we extract all
+humans and create a minimal hash data structure that we can keep in memory
+while importing the movie records (see [4. Import the movie
+records](#import-movie-records)).
+
+<pre><code class="language-shell">
+jq -c '[.id, .labels.mul.value, .labels.en.value, .labels["en-us"].value]'
+</code></pre>
+
+Duration: 92min
+
+<h2 id="import-movie-records">4. Import the movie records</h2>
+
+Finally we import each line of the generated movie json, extract the relevant
+attributes and persist it as records in the
+[PostgreSQL](https://www.postgresql.org/) database. We also generate the TSV
+columns that are needed for search.
+
+Duration: 7min
+
+## Recap
+
+All in all the whole process takes around 12.5 hours. The result is around
+530'000 movies and shows in our database.
+
+1. Download the full dump
+2. Decompress and prefilter the data using ripgrep
+3. Extract the movie and humans entries using wikibase-dump-filter
+4. Import the movie records
+
+Tools used in this pipeline:
+
+- [wikibase-dump-filter](https://github.com/maxlath/wikibase-dump-filter)
+- [ripgrep](https://github.com/BurntSushi/ripgrep)
+- [curl](https://curl.se)
+- [lbzcat](https://linux.die.net/man/1/lbzcat)
+- [parallel](https://www.gnu.org/software/parallel/parallel_tutorial.html)
+- [jq](https://jqlang.org)
