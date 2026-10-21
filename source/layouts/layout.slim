@@ -13,6 +13,14 @@ html lang="en"
     meta name="msapplication-TileColor" content="#da532c"
     meta name="theme-color" content="#ffffff"
     meta name="description" content="Personal blog of software developer Alexis Reigel containing posts about stuff. Free software, web technologies and heavy metal coding (and ruby of course)."
+    meta name="publisher" content="Alexis Reigel"
+    meta name="author" content="Alexis Reigel"
+    meta name="fediverse:creator" content="@koffeinfrei@mastodon.social"
+
+    / article pages only
+    - if current_page.data.date
+      meta name="title" content=current_page.data.title
+      meta name="date" content=DateTime.parse(current_page.data.date).iso8601
 
     = feed_tag :atom, "#{blog.options.prefix.to_s}/posts.atom", title: 'Atom Feed'
     title
